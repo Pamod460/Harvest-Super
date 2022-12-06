@@ -23,4 +23,19 @@ public class GenderDao {
 
     }
 
+    public static Gender getById(int id) {
+        Gender gender = new Gender();
+        try {
+            ResultSet result = CommonDao.get("select * from gender where id = "+id);
+            result.next();
+                gender.setId(result.getInt("id"));
+                gender.setName(result.getString("name"));
+        } catch (SQLException Ex) {
+            System.out.println("Can't Get Results as : " + Ex.getMessage());
+
+        }
+        return gender;
+
+    }
+
 }
