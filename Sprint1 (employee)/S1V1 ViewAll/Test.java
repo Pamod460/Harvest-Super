@@ -14,5 +14,11 @@ public class Test {
             System.out.println(employeeStatus.getId());
             System.out.println(employeeStatus.getName());
         }
+
+        List<Designation> designations = DesignationDao.getAll();
+        for (Designation designation : designations) {
+            System.out.println(designation.getId());
+            System.out.println(designation.getName());
+        }
     }
 }
