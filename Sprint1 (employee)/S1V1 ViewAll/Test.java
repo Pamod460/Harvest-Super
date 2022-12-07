@@ -2,16 +2,16 @@ import java.util.List;
 
 public class Test {
     public static void main(String[] args) {
-        List<Gender> genders = GenderController.get();
-        for (Gender gender:genders){
-            System.out.println(gender.getId());
-            System.out.println(gender.getName());
-        }
+        List<Employee> employees = EmployeeDao.getAll();
+        for (Employee employee : employees) {
+            System.out.println("Id = "+employee.getId());
+            System.out.println("Name = "+employee.getName());
+            System.out.println("Mobile = "+employee.getMobile());
+            System.out.println("Address = "+employee.getAddress());
+            System.out.println("Dssig = "+employee.getDesignation_id());
+            System.out.println("EmpSts = "+employee.getEmployeeststus().getName());
+            System.out.println("Gender = "+employee.getGender().getName());
 
-        List<Designation> designations = DesignationDao.getAll();
-        for (Designation designation : designations) {
-            System.out.println(designation.getId());
-            System.out.println(designation.getName());
         }
     }
 }
