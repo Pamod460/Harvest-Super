@@ -7,7 +7,7 @@ public class Employee {
     private String mobile;
     private String address;
     private EmployeeStatus employeeststus;
-    private int designation_id;
+    private Designation designation;
     private Gender gender;
 
     public Employee() {
@@ -77,12 +77,12 @@ public class Employee {
         this.employeeststus = employeeststus;
     }
 
-    public int getDesignation_id() {
-        return designation_id;
+    public Designation getDesignation() {
+        return designation;
     }
 
-    public void setDesignation_id(int designation_id) {
-        this.designation_id = designation_id;
+    public void setDesignation(Designation designation) {
+        this.designation = designation;
     }
 
     public Gender getGender() {
