@@ -6,9 +6,9 @@ public class Employee {
     private String nic;
     private String mobile;
     private String address;
-    private int employeeststus_id;
+    private EmployeeStatus employeeststus;
     private int designation_id;
-    private Gender gender_id;
+    private Gender gender;
 
     public Employee() {
     }
@@ -69,12 +69,12 @@ public class Employee {
         this.address = address;
     }
 
-    public int getEmployeeststus_id() {
-        return employeeststus_id;
+    public EmployeeStatus getEmployeeststus() {
+        return employeeststus;
     }
 
-    public void setEmployeeststus_id(int employeeststus_id) {
-        this.employeeststus_id = employeeststus_id;
+    public void setEmployeeststus(EmployeeStatus employeeststus) {
+        this.employeeststus = employeeststus;
     }
 
     public int getDesignation_id() {
@@ -85,11 +85,11 @@ public class Employee {
         this.designation_id = designation_id;
     }
 
-    public Gender getGender_id() {
-        return gender_id;
+    public Gender getGender() {
+        return gender;
     }
 
-    public void setGender_id(Gender gender_id) {
-        this.gender_id = gender_id;
+    public void setGender(Gender gender) {
+        this.gender = gender;
     }
 }
