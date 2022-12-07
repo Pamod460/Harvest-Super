@@ -17,9 +17,9 @@ public class EmployeeDao {
                 employee.setMobile(result.getString("mobile"));
                 employee.setAddress(result.getString("address"));
                 employee.setDesignation_id(result.getInt("designation_id"));
-                employee.setEmployeeststus_id(result.getInt("employeestatus_id"));
+                employee.setEmployeeststus(EmployeeStatusDao.getById(result.getInt("employeestatus_id")));
 
-                employee.setGender_id(GenderDao.getById(result.getInt("gender_id")));
+                employee.setGender(GenderDao.getById(result.getInt("gender_id")));
                 
                 employees.add(employee);
             }
