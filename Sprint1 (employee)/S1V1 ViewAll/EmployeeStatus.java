@@ -1,5 +1,4 @@
 public class EmployeeStatus {
-
     private int id;
     private String name;
 

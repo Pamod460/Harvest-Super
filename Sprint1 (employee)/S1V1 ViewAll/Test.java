@@ -8,7 +8,7 @@ public class Test {
             System.out.println("Name = "+employee.getName());
             System.out.println("Mobile = "+employee.getMobile());
             System.out.println("Address = "+employee.getAddress());
-            System.out.println("Dssig = "+employee.getDesignation_id());
+            System.out.println("Dssig = "+employee.getDesignation().getName());
             System.out.println("EmpSts = "+employee.getEmployeeststus().getName());
             System.out.println("Gender = "+employee.getGender().getName());
 
