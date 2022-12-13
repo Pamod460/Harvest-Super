@@ -12,9 +12,11 @@ public class Test {
             System.out.println("Quentity = "+item.getQuentity());
             System.out.println("Saleprice = "+item.getSaleprice());
             System.out.println("Purcheseprice = "+item.getPurcheseprice());
-            System.out.println("Subcategory_id = "+item.getSubcategory_id());
-            System.out.println("Category_id = "+item.getCategory_id());
+            System.out.println("Subcategory = "+item.getSubcategory().getName());
+            System.out.println("Category = "+item.getCategory().getName());
+            System.out.println("itemstatus = " + item.getItemStatus().getName());
 
         }
     }
 }
+/// ui
