@@ -6,8 +6,12 @@ public class Item {
     private  int quentity;
     private double saleprice;
     private  double purcheseprice;
-    private int subcategory_id;
-    private  int category_id;
+
+    private SubCategory subcategory;
+
+    private  Category category;
+
+    private  ItemStatus itemStatus;
 
     public Item(){
     }
@@ -60,19 +64,27 @@ public class Item {
         this.purcheseprice = purcheseprice;
     }
 
-    public int getSubcategory_id() {
-        return subcategory_id;
+    public SubCategory getSubcategory() {
+        return subcategory;
     }
 
-    public void setSubcategory_id(int subcategory_id) {
-        this.subcategory_id = subcategory_id;
+    public void setSubcategory(SubCategory subcategory) {
+        this.subcategory = subcategory;
     }
 
-    public int getCategory_id() {
-        return category_id;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategory_id(int category_id) {
-        this.category_id = category_id;
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public ItemStatus getItemStatus() {
+        return itemStatus;
+    }
+
+    public void setItemStatus(ItemStatus itemStatus) {
+        this.itemStatus = itemStatus;
     }
 }

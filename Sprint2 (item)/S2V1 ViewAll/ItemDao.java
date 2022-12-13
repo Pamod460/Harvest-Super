@@ -17,9 +17,11 @@ public class ItemDao {
                 Item.setQuentity(result.getInt("quentity"));
                 Item.setSaleprice(result.getDouble("saleprice"));
                 Item.setPurcheseprice(result.getDouble("purchaseprice"));
-                Item.setSubcategory_id(result.getInt("subcategory_id"));
-                Item.setCategory_id(result.getInt("category_id"));
+                Item.setSubcategory(SubCategoryDao.getById(result.getInt("subcategory_id")));
+                Item.setCategory(CategoryDao.getById(result.getInt("category_id")));
+                Item.setItemStatus(ItemStatusDao.getById(result.getInt("itemstatus_id")));
                 items.add(Item);
+
             }
         } catch (SQLException Ex) {
             System.out.println("Can't Get Results as : " + Ex.getMessage());
