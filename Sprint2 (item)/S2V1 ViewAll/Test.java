@@ -1,5 +1,7 @@
 import java.util.List;
 
+import javax.swing.JFrame;
+
 public class Test {
     public static void main(String[] args) {
 
@@ -17,6 +19,11 @@ public class Test {
             System.out.println("itemstatus = " + item.getItemStatus().getName());
 
         }
+
+        ItemUi itemUi = new ItemUi();
+        itemUi.setVisible(true);
+        itemUi.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
     }
 }
 /// ui
