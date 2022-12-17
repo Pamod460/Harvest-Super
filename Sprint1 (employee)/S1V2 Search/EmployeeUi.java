@@ -12,7 +12,9 @@ public class EmployeeUi extends JFrame {
     JTextField txtSearchName;
     JButton btnSearch;
     JButton btnSearchClear;
-    List<Employee> employeeList=null;
+    List<Employee> employeeList = null;
+    List<Designation> designationList = null;
+    JComboBox<Designation> cmbSearchDesignation;
 
     EmployeeUi() {
         setTitle("Employee View");
@@ -47,7 +49,6 @@ public class EmployeeUi extends JFrame {
         jspTable.setViewportView(tblEmployee);
         jspTable.setBounds(10, 150, 750, 200);
         conn.add(jspTable);
-        intitialize();
 
         /**  Search area*/
 
@@ -77,23 +78,10 @@ public class EmployeeUi extends JFrame {
                 btnSearchClearAp(e);
             }
         });
-
-
-    }
-
-    private void btnSearchClearAp(ActionEvent e) {
-        txtSearchName.setText("");
-        employeeList = EmployeeController.get(null);
-        fillTable(employeeList);
-
-    }
-
-    private void btnSearchAp(ActionEvent e) {
-        String name = txtSearchName.getText();
-        Hashtable<String, Object> employeeHt = new Hashtable<>();
-        employeeHt.put("name", name);
-        employeeList = EmployeeController.get(employeeHt);
-        fillTable(employeeList);
+        cmbSearchDesignation = new JComboBox();
+        cmbSearchDesignation.setBounds(275, 100, 135, 25);
+        conn.add(cmbSearchDesignation);
+        intitialize();
     }
 
     public void intitialize() {
@@ -103,6 +91,17 @@ public class EmployeeUi extends JFrame {
     public void loadView() {
         employeeList = EmployeeController.get(null);
         fillTable(employeeList);
+
+        designationList = DesignationController.get();
+        Vector<Object> designations = new Vector();
+        designations.add("Select Designation");
+
+        for (Designation designation : designationList) {
+            designations.add(designation);
+        }
+
+        DefaultComboBoxModel<Designation> designationModel = new DefaultComboBoxModel(designations);
+        cmbSearchDesignation.setModel(designationModel);
 
     }
 
@@ -127,4 +126,38 @@ public class EmployeeUi extends JFrame {
         }
 
     }
+
+    private void btnSearchClearAp(ActionEvent e) {
+        txtSearchName.setText("");
+        cmbSearchDesignation.setSelectedIndex(0);
+        employeeList = EmployeeController.get(null);
+        fillTable(employeeList);
+
+    }
+
+    private void btnSearchAp(ActionEvent e) {
+        String name = txtSearchName.getText();
+        Object selectItem = cmbSearchDesignation.getSelectedItem();
+        Designation designation = null;
+
+
+        if (!selectItem.equals("Select Designation")) {
+            designation = (Designation) selectItem;
+
+        }
+        Hashtable<String, Object> employeeHt = new Hashtable<>();
+        if (!name.equals("")) {
+            employeeHt.put("name", name);
+        } else if (designation != null) {
+
+            employeeHt.put("designation", designation);
+        } else if (designation != null && !name.equals("")) {
+            employeeHt = null;
+        }
+        employeeList = EmployeeController.get(employeeHt);
+        fillTable(employeeList);
+
+    }
 }
+
+
