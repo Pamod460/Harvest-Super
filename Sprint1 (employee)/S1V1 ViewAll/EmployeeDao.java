@@ -16,7 +16,7 @@ public class EmployeeDao {
                 employee.setName(result.getString("name"));
                 employee.setMobile(result.getString("mobile"));
                 employee.setAddress(result.getString("address"));
-                employee.setDesignation_id(result.getInt("designation_id"));
+                employee.setDesignation(DesignationDao.getById(result.getInt("designation_id")));
                 employee.setEmployeeststus(EmployeeStatusDao.getById(result.getInt("employeestatus_id")));
 
                 employee.setGender(GenderDao.getById(result.getInt("gender_id")));

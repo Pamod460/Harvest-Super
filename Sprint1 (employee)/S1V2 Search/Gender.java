@@ -1,8 +1,8 @@
-public class EmployeeStatus {
+public class Gender {
     private int id;
     private String name;
 
-    public EmployeeStatus() {
+    public Gender() {
     }
 
     public int getId() {
