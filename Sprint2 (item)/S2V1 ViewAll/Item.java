@@ -9,7 +9,7 @@ public class Item {
 
     private SubCategory subcategory;
 
-    private  Category category;
+//    private  Category category;
 
     private  ItemStatus itemStatus;
 
@@ -72,13 +72,13 @@ public class Item {
         this.subcategory = subcategory;
     }
 
-    public Category getCategory() {
-        return category;
-    }
+//    public Category getCategory() {
+//        return category;
+//    }
 
-    public void setCategory(Category category) {
-        this.category = category;
-    }
+//    public void setCategory(Category category) {
+//        this.category = category;
+//    }
 
     public ItemStatus getItemStatus() {
         return itemStatus;

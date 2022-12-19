@@ -26,7 +26,7 @@ public class ItemUi extends JFrame {
         titles.add("Quantity");
         titles.add("Sale Price");
         titles.add("Purchase Price");
-        titles.add("Category");
+//        titles.add("Category");
         titles.add("Subcategory");
         titles.add("Item Status");
 
@@ -64,7 +64,7 @@ public class ItemUi extends JFrame {
             rows.add(item.getQuentity());
             rows.add(item.getSaleprice());
             rows.add(item.getPurcheseprice());
-            rows.add(item.getCategory().getName());
+//            rows.add(item.getCategory().getName());
             rows.add(item.getSubcategory().getName());
             rows.add(item.getItemStatus().getName());
 

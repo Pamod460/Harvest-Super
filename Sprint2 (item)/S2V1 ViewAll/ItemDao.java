@@ -18,7 +18,7 @@ public class ItemDao {
                 Item.setSaleprice(result.getDouble("saleprice"));
                 Item.setPurcheseprice(result.getDouble("purchaseprice"));
                 Item.setSubcategory(SubCategoryDao.getById(result.getInt("subcategory_id")));
-                Item.setCategory(CategoryDao.getById(result.getInt("category_id")));
+//                Item.setCategory(CategoryDao.getById(result.getInt("category_id")));
                 Item.setItemStatus(ItemStatusDao.getById(result.getInt("itemstatus_id")));
                 items.add(Item);
 
