@@ -14,7 +14,9 @@ public class EmployeeUi extends JFrame {
     JButton btnSearchClear;
     List<Employee> employeeList = null;
     List<Designation> designationList = null;
+    List<Gender> genderList = null;
     JComboBox<Designation> cmbSearchDesignation;
+    JComboBox<Gender> cmbSearchGender;
 
     EmployeeUi() {
         setTitle("Employee View");
@@ -47,24 +49,42 @@ public class EmployeeUi extends JFrame {
 
         JScrollPane jspTable = new JScrollPane();
         jspTable.setViewportView(tblEmployee);
-        jspTable.setBounds(10, 150, 750, 200);
+        jspTable.setBounds(10, 175, 800, 200);
         conn.add(jspTable);
 
         /**  Search area*/
 
         JLabel lblSearchName = new JLabel("Name");
+        JLabel lblSearchGender = new JLabel("Gender");
+        JLabel lblSearchDesignation = new JLabel("Designation");
         txtSearchName = new JTextField();
         btnSearch = new JButton("Search");
         btnSearchClear = new JButton("Clear Search");
+        cmbSearchDesignation = new JComboBox();
+        cmbSearchGender = new JComboBox();
 
-        lblSearchName.setBounds(10, 100, 100, 30);
-        txtSearchName.setBounds(110, 100, 150, 30);
-        btnSearch.setBounds(420, 100, 100, 30);
-        btnSearchClear.setBounds(530, 100, 150, 30);
+
+        lblSearchName.setBounds(10, 70, 75, 30);
+        lblSearchGender.setBounds(223, 70, 75, 30);
+        lblSearchDesignation.setBounds(382, 70, 75, 30);
+        txtSearchName.setBounds(12, 100, 200, 30);
+        cmbSearchGender.setBounds(222, 100, 150, 30);
+        cmbSearchDesignation.setBounds(382,100,150,30);
+        btnSearch.setBounds(420, 140, 100, 30);
+        btnSearchClear.setBounds(530, 140, 150, 30);
+
+
         conn.add(lblSearchName);
+        conn.add(lblSearchGender);
+        conn.add(lblSearchDesignation);
         conn.add(txtSearchName);
         conn.add(btnSearch);
         conn.add(btnSearchClear);
+        conn.add(cmbSearchDesignation);
+        conn.add(cmbSearchGender);
+
+
+
 
         btnSearch.addActionListener(new ActionListener() {
             @Override
@@ -78,9 +98,7 @@ public class EmployeeUi extends JFrame {
                 btnSearchClearAp(e);
             }
         });
-        cmbSearchDesignation = new JComboBox();
-        cmbSearchDesignation.setBounds(275, 100, 135, 25);
-        conn.add(cmbSearchDesignation);
+
         intitialize();
     }
 
@@ -94,7 +112,7 @@ public class EmployeeUi extends JFrame {
 
         designationList = DesignationController.get();
         Vector<Object> designations = new Vector();
-        designations.add("Select Designation");
+        designations.add("Select a Designation");
 
         for (Designation designation : designationList) {
             designations.add(designation);
@@ -103,14 +121,27 @@ public class EmployeeUi extends JFrame {
         DefaultComboBoxModel<Designation> designationModel = new DefaultComboBoxModel(designations);
         cmbSearchDesignation.setModel(designationModel);
 
+        genderList = GenderController.get();
+        Vector<Object> genders = new Vector();
+        genders.add("Select a Gender");
+
+        for (Gender gender : genderList){
+            genders.add(gender);
+        }
+
+        DefaultComboBoxModel<Gender> genderModel = new DefaultComboBoxModel(genders);
+        cmbSearchGender.setModel(genderModel);
+
+
+
     }
 
     public void fillTable(List<Employee> employees) {
 
         DefaultTableModel model = (DefaultTableModel) tblEmployee.getModel();
         model.setRowCount(0);
-
         for (Employee employee : employees) {
+
             Vector rows = new Vector();
             rows.add(employee.getId());
             rows.add(employee.getStaffnumber());
@@ -130,6 +161,7 @@ public class EmployeeUi extends JFrame {
     private void btnSearchClearAp(ActionEvent e) {
         txtSearchName.setText("");
         cmbSearchDesignation.setSelectedIndex(0);
+        cmbSearchGender.setSelectedIndex(0);
         employeeList = EmployeeController.get(null);
         fillTable(employeeList);
 
@@ -137,12 +169,19 @@ public class EmployeeUi extends JFrame {
 
     private void btnSearchAp(ActionEvent e) {
         String name = txtSearchName.getText();
-        Object selectItem = cmbSearchDesignation.getSelectedItem();
+        Object selectedDesig = cmbSearchDesignation.getSelectedItem();
         Designation designation = null;
 
+        Object selectedGender = cmbSearchGender.getSelectedItem();
+        Gender gender = null;
 
-        if (!selectItem.equals("Select Designation")) {
-            designation = (Designation) selectItem;
+
+        if (!selectedDesig.equals("Select a Designation")) {
+            designation = (Designation) selectedDesig;
+
+        }
+        if (!selectedGender.equals("Select a Gender")) {
+            gender = (Gender) selectedGender;
 
         }
         Hashtable<String, Object> employeeHt = new Hashtable<>();
@@ -151,11 +190,14 @@ public class EmployeeUi extends JFrame {
         } else if (designation != null) {
 
             employeeHt.put("designation", designation);
-        } else if (designation != null && !name.equals("")) {
-            employeeHt = null;
+        } else if (gender != null) {
+            employeeHt.put("gender",gender);
         }
+
         employeeList = EmployeeController.get(employeeHt);
         fillTable(employeeList);
+
+
 
     }
 }
