@@ -1,9 +1,9 @@
-public class EmployeeStatus {
-    private int id;
-    private String name;
+public class Category{
 
-    public EmployeeStatus() {
-    }
+    private  int id;
+    private  String name;
+
+    Category(){}
 
     public int getId() {
         return id;
