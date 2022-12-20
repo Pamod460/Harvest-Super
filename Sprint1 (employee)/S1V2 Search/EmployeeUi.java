@@ -15,8 +15,10 @@ public class EmployeeUi extends JFrame {
     List<Employee> employeeList = null;
     List<Designation> designationList = null;
     List<Gender> genderList = null;
+    List<EmployeeStatus> employeeStatusList = null;
     JComboBox<Designation> cmbSearchDesignation;
     JComboBox<Gender> cmbSearchGender;
+    JComboBox<EmployeeStatus> cmbSearchEmployeeStatus;
 
     EmployeeUi() {
         setTitle("Employee View");
@@ -57,11 +59,13 @@ public class EmployeeUi extends JFrame {
         JLabel lblSearchName = new JLabel("Name");
         JLabel lblSearchGender = new JLabel("Gender");
         JLabel lblSearchDesignation = new JLabel("Designation");
+        JLabel lblSearchEmployeeStatus = new JLabel("Status");
         txtSearchName = new JTextField();
         btnSearch = new JButton("Search");
         btnSearchClear = new JButton("Clear Search");
         cmbSearchDesignation = new JComboBox();
         cmbSearchGender = new JComboBox();
+        cmbSearchEmployeeStatus = new JComboBox();
 
 
         lblSearchName.setBounds(10, 70, 75, 30);
@@ -70,18 +74,22 @@ public class EmployeeUi extends JFrame {
         txtSearchName.setBounds(12, 100, 200, 30);
         cmbSearchGender.setBounds(222, 100, 150, 30);
         cmbSearchDesignation.setBounds(382,100,150,30);
+        cmbSearchEmployeeStatus.setBounds(542,100,150,30);
         btnSearch.setBounds(420, 140, 100, 30);
         btnSearchClear.setBounds(530, 140, 150, 30);
+
 
 
         conn.add(lblSearchName);
         conn.add(lblSearchGender);
         conn.add(lblSearchDesignation);
         conn.add(txtSearchName);
-        conn.add(btnSearch);
-        conn.add(btnSearchClear);
         conn.add(cmbSearchDesignation);
         conn.add(cmbSearchGender);
+        conn.add(cmbSearchEmployeeStatus);
+        conn.add(btnSearch);
+        conn.add(btnSearchClear);
+
 
 
 
@@ -132,7 +140,16 @@ public class EmployeeUi extends JFrame {
         DefaultComboBoxModel<Gender> genderModel = new DefaultComboBoxModel(genders);
         cmbSearchGender.setModel(genderModel);
 
+        employeeStatusList = EmployeeStatusController.get();
+        Vector<Object> employeeStatuses = new Vector<>();
+        employeeStatuses.add("Select a Status");
 
+        for (EmployeeStatus sts : employeeStatusList){
+            employeeStatuses.add(sts);
+        }
+
+        DefaultComboBoxModel<EmployeeStatus> stsModel = new DefaultComboBoxModel(employeeStatuses);
+        cmbSearchEmployeeStatus.setModel(stsModel);
 
     }
 
@@ -162,6 +179,7 @@ public class EmployeeUi extends JFrame {
         txtSearchName.setText("");
         cmbSearchDesignation.setSelectedIndex(0);
         cmbSearchGender.setSelectedIndex(0);
+        cmbSearchEmployeeStatus.setSelectedIndex(0);
         employeeList = EmployeeController.get(null);
         fillTable(employeeList);
 
@@ -175,6 +193,9 @@ public class EmployeeUi extends JFrame {
         Object selectedGender = cmbSearchGender.getSelectedItem();
         Gender gender = null;
 
+        Object selectedStatus = cmbSearchEmployeeStatus.getSelectedItem();
+        EmployeeStatus status = null;
+
 
         if (!selectedDesig.equals("Select a Designation")) {
             designation = (Designation) selectedDesig;
@@ -182,6 +203,10 @@ public class EmployeeUi extends JFrame {
         }
         if (!selectedGender.equals("Select a Gender")) {
             gender = (Gender) selectedGender;
+
+        }
+        if (!selectedStatus.equals("Select a Status")){
+            status = (EmployeeStatus) selectedStatus;
 
         }
         Hashtable<String, Object> employeeHt = new Hashtable<>();
@@ -192,14 +217,17 @@ public class EmployeeUi extends JFrame {
             employeeHt.put("designation", designation);
         } else if (gender != null) {
             employeeHt.put("gender",gender);
+        } else if (status != null) {
+            employeeHt.put("employeestatus",status);
+        } else {
+            employeeHt = null;
         }
 
         employeeList = EmployeeController.get(employeeHt);
         fillTable(employeeList);
 
-
-
     }
+    
 }
 
 
