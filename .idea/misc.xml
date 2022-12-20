@@ -6,4 +6,11 @@
   <component name="ProjectType">
     <option name="id" value="jpab" />
   </component>
+  <component name="SuppressABINotification">
+    <option name="modulesWithSuppressedNotConfigured">
+      <set>
+        <option value="Harvest-Super" />
+      </set>
+    </option>
+  </component>
 </project>
