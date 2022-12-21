@@ -32,7 +32,6 @@ public class DesignationDao {
             designation.setName(result.getString("name"));
         } catch (SQLException Ex) {
             System.out.println("Can't Get Results as : " + Ex.getMessage());
-
         }
         return designation;
 
