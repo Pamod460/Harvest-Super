@@ -12,6 +12,7 @@ public class EmployeeController {
             Designation designation = (Designation) employeeHt.get("designation");
             Gender gender = (Gender) employeeHt.get("gender");
             EmployeeStatus employeeStatus = (EmployeeStatus) employeeHt.get("employeestatus");
+
             if (designation == null && gender == null && name != null && employeeStatus == null) {
                 employees = EmployeeDao.getByName(name);
             } else if (designation != null && gender == null && name == null && employeeStatus == null) {
@@ -20,6 +21,8 @@ public class EmployeeController {
                 employees = EmployeeDao.getByGender(gender);
             }else if (designation == null && gender == null && name == null && employeeStatus != null) {
                 employees = EmployeeDao.getByStatus(employeeStatus);
+            } else if (designation != null && gender != null && name != null && employeeStatus != null) {
+                employees = EmployeeDao.getByAll(name,gender,designation,employeeStatus);
             }
         }
 
