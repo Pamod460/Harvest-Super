@@ -15,7 +15,11 @@ public class ItemUi extends JFrame {
     JComboBox cmbSearchItemStatus;
     JComboBox cmbSearchSubCategory;
 
-    List<Item> itemList;
+    List<Item> itemList = null;
+
+    List<SubCategory> SubCategoryList = null;
+
+    List<ItemStatus> itemStatusList = null;
 
     JTextField txtSearchName;
     ItemUi() {
@@ -33,7 +37,6 @@ public class ItemUi extends JFrame {
         titles.add("Quantity");
         titles.add("Sale Price");
         titles.add("Purchase Price");
-//        titles.add("Category");
         titles.add("Subcategory");
         titles.add("Item Status");
 
@@ -84,24 +87,45 @@ public class ItemUi extends JFrame {
         btnSearchClear.addActionListener(e -> {btnSearchClearAp(e);});
 
         initialize();
-
     }
-
-
-
     private void initialize() {
         loadView();
     }
 
     public void loadView() {
+
         itemList = ItemController.get(null);
         fillTable(itemList);
+
+        itemStatusList = ItemStatusController.get();
+        Vector<Object> itemstatuses = new Vector();
+        itemstatuses.add("Select a Status");
+
+        for (ItemStatus itemstatus : itemStatusList){
+            itemstatuses.add(itemstatus);
+        }
+        DefaultComboBoxModel<ItemStatus> ItemStatusModel = new DefaultComboBoxModel(itemstatuses);
+        cmbSearchItemStatus.setModel(ItemStatusModel);
+
+
+        SubCategoryList = SubCategoryController.get();
+        Vector<Object> subcatogry = new Vector();
+        subcatogry.add("Select a Category");
+
+        for (SubCategory subCategories : SubCategoryList){
+            subcatogry.add(subCategories);
+        }
+        DefaultComboBoxModel<SubCategory> SubCategoryModel = new DefaultComboBoxModel(subcatogry);
+        cmbSearchSubCategory.setModel(SubCategoryModel);
+
     }
 
     public void fillTable(List<Item> items) {
         DefaultTableModel model = (DefaultTableModel) tblItem.getModel();
-         model.setRowCount(0);
-        for (Item item : items) {
+        model.setRowCount(0);
+
+        for(Item item : items) {
+
             Vector rows = new Vector<>();
             rows.add(item.getId());
             rows.add(item.getCode());
@@ -109,7 +133,6 @@ public class ItemUi extends JFrame {
             rows.add(item.getQuentity());
             rows.add(item.getSaleprice());
             rows.add(item.getPurcheseprice());
-//            rows.add(item.getCategory().getName());
             rows.add(item.getSubcategory().getName());
             rows.add(item.getItemStatus().getName());
 
@@ -119,13 +142,31 @@ public class ItemUi extends JFrame {
 
     private void btnSearchAp(ActionEvent e){
 
-        Hashtable <String , Object> itemHt = new Hashtable<>();
         String name = txtSearchName.getText();
+
+        Object selectedItemStatus = cmbSearchItemStatus.getSelectedItem();
+        ItemStatus itemstatus = null;
+
+        Object selectedSubCategory = cmbSearchSubCategory.getSelectedItem();
+        SubCategory subcatogory = null;
+
+        if (!selectedItemStatus.equals("Select a Status")) {
+            itemstatus = (ItemStatus) selectedItemStatus;
+        }
+        if (!selectedSubCategory.equals("Select a Category")) {
+            subcatogory = (SubCategory) selectedSubCategory;
+        }
+
+        Hashtable <String , Object> itemHt = new Hashtable<>();
         if (!name.equals("")) {
             itemHt.put("name" , name);
-
-        }else {
+        } else if (itemstatus != null) {
+            itemHt.put("status" , itemstatus);
+        } else if (subcatogory != null) {
+            itemHt.put("subcategory" , subcatogory);
+        } else {
             JOptionPane.showMessageDialog(null, "Please Enter Value");
+            itemHt = null;
         }
         itemList = ItemController.get(itemHt);
         fillTable(itemList);
@@ -133,6 +174,8 @@ public class ItemUi extends JFrame {
 
     private void btnSearchClearAp(ActionEvent e) {
         txtSearchName.setText("");
+        cmbSearchItemStatus.setSelectedItem(0);
+        cmbSearchSubCategory.setSelectedItem(0);
         loadView();
     }
 }

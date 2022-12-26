@@ -31,4 +31,7 @@ public class SubCategory {
     }
 
 
+    public  String toString(){
+        return  name;
+    }
 }

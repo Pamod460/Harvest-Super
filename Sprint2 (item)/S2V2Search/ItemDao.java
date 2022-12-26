@@ -47,5 +47,16 @@ public class ItemDao {
 
     }
 
+    public static List<Item> getByItemStatus(ItemStatus itemstatus) {
+        ResultSet result = CommonDao.get("select * from item where itemstatus_id=" + itemstatus.getId());
+        List<Item> items = get(result);
+        return items;
+    }
+
+    public static List<Item> getBySubCategory(SubCategory subCategory) {
+        ResultSet result = CommonDao.get("select * from item where subcategory_id=" + subCategory.getId());
+        List<Item> items = get(result);
+        return items;
+    }
 
 }
