@@ -210,16 +210,22 @@ public class EmployeeUi extends JFrame {
 
         }
         Hashtable<String, Object> employeeHt = new Hashtable<>();
-        if (!name.equals("")) {
+        if (!name.equals("") && designation == null && gender == null && status == null) {
             employeeHt.put("name", name);
-        } else if (designation != null) {
-
+        } else if (name.equals("") && designation != null && gender == null && status == null) {
             employeeHt.put("designation", designation);
-        } else if (gender != null) {
+        } else if (name.equals("") && designation == null && gender != null && status == null) {
             employeeHt.put("gender",gender);
-        } else if (status != null) {
+        } else if (name.equals("") && designation == null && gender == null && status != null) {
             employeeHt.put("employeestatus",status);
-        } else {
+        } else if(!name.equals("") && designation != null && gender != null && status != null ){
+            employeeHt.put("name", name);
+            employeeHt.put("designation", designation);
+            employeeHt.put("gender",gender);
+            employeeHt.put("employeestatus",status);
+        }
+
+        else {
             employeeHt = null;
         }
 

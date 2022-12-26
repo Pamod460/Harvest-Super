@@ -58,4 +58,10 @@ public class EmployeeDao {
         return employees;
     }
 
+    public  static  List<Employee> getByAll(String name,Gender gender,Designation designation,EmployeeStatus employeeStatus){
+        ResultSet result = CommonDao.get("select * from employee where name like '"+name+"%' and  gender_id="+gender.getId()+" and designation_id="+designation.getId()+" and employeestatus_id="+employeeStatus.getId() );
+        List<Employee> employees = setData(result);
+        return employees;
+    }
+
 }
