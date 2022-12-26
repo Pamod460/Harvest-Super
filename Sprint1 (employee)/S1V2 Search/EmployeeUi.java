@@ -56,10 +56,10 @@ public class EmployeeUi extends JFrame {
 
         /**  Search area*/
 
-        JLabel lblSearchName = new JLabel("Name");
-        JLabel lblSearchGender = new JLabel("Gender");
-        JLabel lblSearchDesignation = new JLabel("Designation");
-        JLabel lblSearchEmployeeStatus = new JLabel("Status");
+        JLabel lblSearchName = new JLabel("Name :");
+        JLabel lblSearchGender = new JLabel("Gender :");
+        JLabel lblSearchDesignation = new JLabel("Designation :");
+        JLabel lblSearchEmployeeStatus = new JLabel("Status :");
         txtSearchName = new JTextField();
         btnSearch = new JButton("Search");
         btnSearchClear = new JButton("Clear Search");
@@ -71,6 +71,8 @@ public class EmployeeUi extends JFrame {
         lblSearchName.setBounds(10, 70, 75, 30);
         lblSearchGender.setBounds(223, 70, 75, 30);
         lblSearchDesignation.setBounds(382, 70, 75, 30);
+        lblSearchEmployeeStatus.setBounds(541, 70, 75, 30);
+
         txtSearchName.setBounds(12, 100, 200, 30);
         cmbSearchGender.setBounds(222, 100, 150, 30);
         cmbSearchDesignation.setBounds(382,100,150,30);
@@ -83,6 +85,7 @@ public class EmployeeUi extends JFrame {
         conn.add(lblSearchName);
         conn.add(lblSearchGender);
         conn.add(lblSearchDesignation);
+        conn.add(lblSearchEmployeeStatus);
         conn.add(txtSearchName);
         conn.add(cmbSearchDesignation);
         conn.add(cmbSearchGender);

@@ -8,6 +8,7 @@ public class EmployeeDao {
         List<Employee> employees = new ArrayList<>();
         try {
             while (result.next()) {
+
                 Employee employee = new Employee();
                 employee.setId(result.getInt("id"));
                 employee.setStaffnumber(result.getString("staffnumber"));
@@ -20,6 +21,7 @@ public class EmployeeDao {
                 employee.setEmployeeststus(EmployeeStatusDao.getById(result.getInt("employeestatus_id")));
                 employee.setGender(GenderDao.getById(result.getInt("gender_id")));
                 employees.add(employee);
+
             }
         } catch (SQLException Ex) {
             System.out.println("Can't Get Results as : " + Ex.getMessage());
