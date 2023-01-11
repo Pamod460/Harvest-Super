@@ -75,11 +75,10 @@ public class EmployeeUi extends JFrame {
 
         txtSearchName.setBounds(12, 100, 200, 30);
         cmbSearchGender.setBounds(222, 100, 150, 30);
-        cmbSearchDesignation.setBounds(382,100,150,30);
-        cmbSearchEmployeeStatus.setBounds(542,100,150,30);
+        cmbSearchDesignation.setBounds(382, 100, 150, 30);
+        cmbSearchEmployeeStatus.setBounds(542, 100, 150, 30);
         btnSearch.setBounds(420, 140, 100, 30);
         btnSearchClear.setBounds(530, 140, 150, 30);
-
 
 
         conn.add(lblSearchName);
@@ -92,9 +91,6 @@ public class EmployeeUi extends JFrame {
         conn.add(cmbSearchEmployeeStatus);
         conn.add(btnSearch);
         conn.add(btnSearchClear);
-
-
-
 
 
         btnSearch.addActionListener(new ActionListener() {
@@ -136,7 +132,7 @@ public class EmployeeUi extends JFrame {
         Vector<Object> genders = new Vector();
         genders.add("Select a Gender");
 
-        for (Gender gender : genderList){
+        for (Gender gender : genderList) {
             genders.add(gender);
         }
 
@@ -147,7 +143,7 @@ public class EmployeeUi extends JFrame {
         Vector<Object> employeeStatuses = new Vector<>();
         employeeStatuses.add("Select a Status");
 
-        for (EmployeeStatus sts : employeeStatusList){
+        for (EmployeeStatus sts : employeeStatusList) {
             employeeStatuses.add(sts);
         }
 
@@ -200,15 +196,18 @@ public class EmployeeUi extends JFrame {
         EmployeeStatus status = null;
 
 
+        assert selectedDesig != null;
         if (!selectedDesig.equals("Select a Designation")) {
             designation = (Designation) selectedDesig;
 
         }
+        assert selectedGender != null;
         if (!selectedGender.equals("Select a Gender")) {
             gender = (Gender) selectedGender;
 
         }
-        if (!selectedStatus.equals("Select a Status")){
+        assert selectedStatus != null;
+        if (!selectedStatus.equals("Select a Status")) {
             status = (EmployeeStatus) selectedStatus;
 
         }
@@ -218,17 +217,24 @@ public class EmployeeUi extends JFrame {
         } else if (name.equals("") && designation != null && gender == null && status == null) {
             employeeHt.put("designation", designation);
         } else if (name.equals("") && designation == null && gender != null && status == null) {
-            employeeHt.put("gender",gender);
+            employeeHt.put("gender", gender);
         } else if (name.equals("") && designation == null && gender == null && status != null) {
-            employeeHt.put("employeestatus",status);
-        } else if(!name.equals("") && designation != null && gender != null && status != null ){
+            employeeHt.put("employeestatus", status);
+        } else if (!name.equals("") && designation == null && gender != null && status == null) {
+            employeeHt.put("name", name);
+            employeeHt.put("gender", gender);
+        } else if (!name.equals("") && designation != null && gender == null && status == null) {
             employeeHt.put("name", name);
             employeeHt.put("designation", designation);
-            employeeHt.put("gender",gender);
-            employeeHt.put("employeestatus",status);
-        }
-
-        else {
+        } else if (!name.equals("") && designation == null && gender == null && status != null) {
+            employeeHt.put("name", name);
+            employeeHt.put("employeestatus", status);
+        } else if (!name.equals("") && designation != null && gender != null && status != null) {
+            employeeHt.put("name", name);
+            employeeHt.put("designation", designation);
+            employeeHt.put("gender", gender);
+            employeeHt.put("employeestatus", status);
+        } else {
             employeeHt = null;
         }
 
@@ -236,7 +242,7 @@ public class EmployeeUi extends JFrame {
         fillTable(employeeList);
 
     }
-    
+
 }
 
 

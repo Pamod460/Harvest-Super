@@ -14,14 +14,24 @@ public class EmployeeController {
             EmployeeStatus employeeStatus = (EmployeeStatus) employeeHt.get("employeestatus");
 
             if (designation == null && gender == null && name != null && employeeStatus == null) {
+
                 employees = EmployeeDao.getByName(name);
+
             } else if (designation != null && gender == null && name == null && employeeStatus == null) {
+
                 employees = EmployeeDao.getByDesignation(designation);
+
             } else if (designation == null && gender != null && name == null && employeeStatus == null) {
                 employees = EmployeeDao.getByGender(gender);
             }else if (designation == null && gender == null && name == null && employeeStatus != null) {
                 employees = EmployeeDao.getByStatus(employeeStatus);
-            } else if (designation != null && gender != null && name != null && employeeStatus != null) {
+            } else if (designation == null && gender != null && name != null && employeeStatus == null) {
+                employees = EmployeeDao.getByNameAndGender(name,gender);
+            }else if (designation != null && gender == null && name != null && employeeStatus == null) {
+                employees = EmployeeDao.getByNameAndDesignation(name,designation);
+            }else if (designation == null && gender == null && name != null && employeeStatus != null) {
+                employees = EmployeeDao.getByNameAndEmployeeStatus(name,employeeStatus);
+            }else if (designation != null && gender != null && name != null && employeeStatus != null) {
                 employees = EmployeeDao.getByAll(name,gender,designation,employeeStatus);
             }
         }

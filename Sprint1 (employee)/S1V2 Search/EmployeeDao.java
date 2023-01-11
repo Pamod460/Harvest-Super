@@ -59,11 +59,30 @@ public class EmployeeDao {
         List<Employee> employees = setData(result);
         return employees;
     }
+    public static List<Employee> getByNameAndGender(String name, Gender gender) {
+        ResultSet result = CommonDao.get("select * from employee where name like '"+name+"%' and  gender_id="+gender.getId());
+        List<Employee> employees = setData(result);
+        return employees;
+    }
 
+    public static List<Employee> getByNameAndDesignation(String name, Designation designation) {
+        ResultSet result = CommonDao.get("select * from employee where name like '"+name+"%' and designation_id="+designation.getId());
+        List<Employee> employees = setData(result);
+        return employees;
+
+    }
+
+    public static List<Employee> getByNameAndEmployeeStatus(String name, EmployeeStatus employeeStatus) {
+        ResultSet result = CommonDao.get("select * from employee where name like '"+name+"%' and employeestatus_id="+employeeStatus.getId() );
+        List<Employee> employees = setData(result);
+        return employees;
+
+    }
     public  static  List<Employee> getByAll(String name,Gender gender,Designation designation,EmployeeStatus employeeStatus){
         ResultSet result = CommonDao.get("select * from employee where name like '"+name+"%' and  gender_id="+gender.getId()+" and designation_id="+designation.getId()+" and employeestatus_id="+employeeStatus.getId() );
         List<Employee> employees = setData(result);
         return employees;
     }
+
 
 }

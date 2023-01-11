@@ -3,10 +3,7 @@
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/Sprint2 (item)/S2V2Search" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Sprint3 (supplier)/S3V1 ViewAll" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Sprint1 (employee)" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/Sprint1 (employee)/S1V2 Search" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Sprint1 (employee)/S1V2 Search" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/.idea/dataSources" />
     </content>
     <orderEntry type="inheritedJdk" />
