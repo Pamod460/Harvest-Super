@@ -229,7 +229,16 @@ public class EmployeeUi extends JFrame {
         } else if (!name.equals("") && designation == null && gender == null && status != null) {
             employeeHt.put("name", name);
             employeeHt.put("employeestatus", status);
-        } else if (!name.equals("") && designation != null && gender != null && status != null) {
+        }else if (name.equals("") && designation != null && gender != null && status == null) {
+            employeeHt.put("designation", designation);
+            employeeHt.put("gender", gender);
+        } else if (name.equals("") && designation == null && gender != null && status != null) {
+            employeeHt.put("gender", gender);
+            employeeHt.put("employeestatus", status);
+        } else if (name.equals("") && designation != null && gender == null && status != null) {
+            employeeHt.put("designation", designation);
+            employeeHt.put("employeestatus", status);
+        }else if (!name.equals("") && designation != null && gender != null && status != null) {
             employeeHt.put("name", name);
             employeeHt.put("designation", designation);
             employeeHt.put("gender", gender);

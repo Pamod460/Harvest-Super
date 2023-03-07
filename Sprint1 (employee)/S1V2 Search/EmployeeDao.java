@@ -84,5 +84,24 @@ public class EmployeeDao {
         return employees;
     }
 
+    public static List<Employee> getByGenderAndDesignation(Gender gender, Designation designation) {
+        ResultSet result = CommonDao.get("select * from employee where gender_id="+gender.getId()+" and designation_id="+designation.getId());
+        List<Employee> employees = setData(result);
+        return employees;
+    }
+
+    public static List<Employee> getByGenderAndStatus(Gender gender, EmployeeStatus employeeStatus) {
+        ResultSet result = CommonDao.get("select * from employee where gender_id="+gender.getId()+" and employeestatus_id="+employeeStatus.getId() );
+        List<Employee> employees = setData(result);
+        return employees;
+    }
+
+    public static List<Employee> getByDesignationAndStatus(Designation designation, EmployeeStatus employeeStatus) {
+        ResultSet result = CommonDao.get("select * from employee where designation_id="+designation.getId()+" and employeestatus_id="+employeeStatus.getId() );
+        List<Employee> employees = setData(result);
+        return employees;
+    }
+
+
 
 }
