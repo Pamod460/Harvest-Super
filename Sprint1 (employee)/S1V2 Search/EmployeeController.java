@@ -37,9 +37,19 @@ public class EmployeeController {
                 employees = EmployeeDao.getByGenderAndStatus(gender,employeeStatus);
             }else if (designation != null && gender == null && name == null && employeeStatus != null) {
                 employees = EmployeeDao.getByDesignationAndStatus(designation,employeeStatus);
-            }else if (designation != null && gender != null && name != null && employeeStatus != null) {
+            }else if (designation != null && gender != null && name != null && employeeStatus == null) {
+                employees = EmployeeDao.getByNameGenderDesignation(name,gender,designation);
+            }else if (designation == null && gender != null && name != null && employeeStatus != null) {
+                employees = EmployeeDao.getByNameGenderStatus(name,gender,employeeStatus);
+            }else if (designation != null && gender == null && name != null && employeeStatus != null) {
+                employees = EmployeeDao.getByNameDesignationStatus(name,designation,employeeStatus);
+            }else if (designation != null && gender != null && name == null && employeeStatus != null) {
+                employees = EmployeeDao.getByGenderDesignationStatus(gender,designation,employeeStatus);
+            }
+            else if (designation != null && gender != null && name != null && employeeStatus != null) {
                 employees = EmployeeDao.getByAll(name,gender,designation,employeeStatus);
             }
+
         }
 
 
