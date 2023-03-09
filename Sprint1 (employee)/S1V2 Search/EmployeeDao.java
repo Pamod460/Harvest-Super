@@ -103,5 +103,27 @@ public class EmployeeDao {
     }
 
 
+    public static List<Employee> getByNameGenderDesignation(String name, Gender gender, Designation designation) {
+        ResultSet result = CommonDao.get("select * from employee where name like '"+name+"%' and  gender_id="+gender.getId()+" and designation_id="+designation.getId() );
+        List<Employee> employees = setData(result);
+        return employees;
+    }
 
+    public static List<Employee> getByNameGenderStatus(String name, Gender gender, EmployeeStatus employeeStatus) {
+        ResultSet result = CommonDao.get("select * from employee where name like '"+name+"%' and  gender_id="+gender.getId()+" and employeestatus_id="+employeeStatus.getId() );
+        List<Employee> employees = setData(result);
+        return employees;
+    }
+
+    public static List<Employee> getByNameDesignationStatus(String name, Designation designation, EmployeeStatus employeeStatus) {
+        ResultSet result = CommonDao.get("select * from employee where name like '"+name+"%' and designation_id="+designation.getId()+" and employeestatus_id="+employeeStatus.getId() );
+        List<Employee> employees = setData(result);
+        return employees;
+    }
+
+    public static List<Employee> getByGenderDesignationStatus(Gender gender, Designation designation, EmployeeStatus employeeStatus) {
+        ResultSet result = CommonDao.get("select * from employee where gender_id="+gender.getId()+" and designation_id="+designation.getId()+" and employeestatus_id="+employeeStatus.getId() );
+        List<Employee> employees = setData(result);
+        return employees;
+    }
 }
