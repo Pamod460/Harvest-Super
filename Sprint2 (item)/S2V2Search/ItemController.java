@@ -19,6 +19,17 @@ public class ItemController {
                 itemList = ItemDao.getByItemStatus(itemStatus);
             } else if (subCategory != null && itemStatus == null && name == null) {
                 itemList = ItemDao.getBySubCategory(subCategory);
+            }else if (subCategory == null && itemStatus != null && name != null) {
+                itemList = ItemDao.getByNameAndItemStatus(name,itemStatus);
+
+            }else if (subCategory != null && itemStatus == null && name != null) {
+                itemList = ItemDao.getByNameAndSubCategory(name,subCategory);
+
+            }else if (subCategory != null && itemStatus != null && name == null) {
+                itemList = ItemDao.getBySubCategoryAndItemStatus(subCategory,itemStatus);
+
+            }else if (subCategory != null && itemStatus != null && name != null) {
+                itemList = ItemDao.getByAll(name,itemStatus,subCategory);
             }
         }
 
