@@ -34,29 +34,68 @@ public class ItemDao {
 
 
     public static List<Item> getAll() {
-        ResultSet result = CommonDao.get("select * from item");
+
+        String sql = "select * from item";
+        ResultSet result = CommonDao.get(sql);
         List<Item> items = get(result);
         return items;
 
     }
 
     public static List<Item> getByName(String name) {
-        ResultSet result = CommonDao.get("select * from item where name like'" +name+"%'");
+
+        String sql = "select * from item where name like'" +name+"%'";
+        ResultSet result = CommonDao.get(sql);
         List<Item> items = get(result);
         return items;
 
     }
 
     public static List<Item> getByItemStatus(ItemStatus itemstatus) {
-        ResultSet result = CommonDao.get("select * from item where itemstatus_id=" + itemstatus.getId());
+        String sql =  "select * from item where itemstatus_id=" + itemstatus.getId();
+        ResultSet result = CommonDao.get(sql);
         List<Item> items = get(result);
         return items;
     }
 
     public static List<Item> getBySubCategory(SubCategory subCategory) {
-        ResultSet result = CommonDao.get("select * from item where subcategory_id=" + subCategory.getId());
+
+        String sql = "select * from item where subcategory_id=" + subCategory.getId();
+        ResultSet result = CommonDao.get(sql);
         List<Item> items = get(result);
         return items;
     }
 
+    public static List<Item> getByNameAndItemStatus(String name, ItemStatus itemStatus){
+
+        String sql = "select * from item where name like'"+name+"%' and itemstatus_id=" + itemStatus.getId();
+        ResultSet result = CommonDao.get(sql);
+        List<Item> items = get(result);
+        return items;
+    }
+
+    public static List<Item> getByNameAndSubCategory(String name, SubCategory subCategory) {
+
+        String sql = "select * from item where name like '"+name+"%' and subcategory_id=" + subCategory.getId();
+        ResultSet result = CommonDao.get(sql);
+        List<Item> items = get(result);
+        return items;
+    }
+
+    public static List<Item> getBySubCategoryAndItemStatus(SubCategory subCategory, ItemStatus itemStatus) {
+
+        String sql = "select * from item where itemstatus_id=" + itemStatus.getId()+" and subcategory_id=" + subCategory.getId();
+        ResultSet result = CommonDao.get(sql);
+        List<Item> items = get(result);
+        return items;
+    }
+
+    public static List<Item> getByAll(String name, ItemStatus itemStatus, SubCategory subCategory) {
+
+        String sql = "select * from item where name like '"+name+"%' and itemstatus_id=" + itemStatus.getId()+" and subcategory_id=" + subCategory.getId();
+        System.out.println(sql);
+        ResultSet result = CommonDao.get(sql);
+        List<Item> items = get(result);
+        return items;
+    }
 }

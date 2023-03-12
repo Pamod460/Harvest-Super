@@ -22,6 +22,7 @@ public class ItemUi extends JFrame {
     List<ItemStatus> itemStatusList = null;
 
     JTextField txtSearchName;
+
     ItemUi() {
         setTitle("Item View");
         setLocation(200, 300);
@@ -61,7 +62,7 @@ public class ItemUi extends JFrame {
 
 
         JButton btnSearch = new JButton("Search");
-        JButton btnSearchClear  = new JButton("Clear Search");
+        JButton btnSearchClear = new JButton("Clear Search");
         txtSearchName = new JTextField();
 
 
@@ -70,7 +71,7 @@ public class ItemUi extends JFrame {
         lblSearchSubCategory.setBounds(382, 70, 75, 30);
         txtSearchName.setBounds(12, 100, 200, 30);
         cmbSearchItemStatus.setBounds(222, 100, 150, 30);
-        cmbSearchSubCategory.setBounds(382,100,150,30);
+        cmbSearchSubCategory.setBounds(382, 100, 150, 30);
         btnSearch.setBounds(420, 140, 100, 30);
         btnSearchClear.setBounds(530, 140, 150, 30);
 
@@ -83,11 +84,16 @@ public class ItemUi extends JFrame {
         con.add(cmbSearchItemStatus);
         con.add(cmbSearchSubCategory);
 
-        btnSearch.addActionListener(e -> {btnSearchAp(e);});
-        btnSearchClear.addActionListener(e -> {btnSearchClearAp(e);});
+        btnSearch.addActionListener(e -> {
+            btnSearchAp(e);
+        });
+        btnSearchClear.addActionListener(e -> {
+            btnSearchClearAp(e);
+        });
 
         initialize();
     }
+
     private void initialize() {
         loadView();
     }
@@ -101,7 +107,7 @@ public class ItemUi extends JFrame {
         Vector<Object> itemstatuses = new Vector();
         itemstatuses.add("Select a Status");
 
-        for (ItemStatus itemstatus : itemStatusList){
+        for (ItemStatus itemstatus : itemStatusList) {
             itemstatuses.add(itemstatus);
         }
         DefaultComboBoxModel<ItemStatus> ItemStatusModel = new DefaultComboBoxModel(itemstatuses);
@@ -112,7 +118,7 @@ public class ItemUi extends JFrame {
         Vector<Object> subcatogry = new Vector();
         subcatogry.add("Select a Category");
 
-        for (SubCategory subCategories : SubCategoryList){
+        for (SubCategory subCategories : SubCategoryList) {
             subcatogry.add(subCategories);
         }
         DefaultComboBoxModel<SubCategory> SubCategoryModel = new DefaultComboBoxModel(subcatogry);
@@ -124,7 +130,7 @@ public class ItemUi extends JFrame {
         DefaultTableModel model = (DefaultTableModel) tblItem.getModel();
         model.setRowCount(0);
 
-        for(Item item : items) {
+        for (Item item : items) {
 
             Vector rows = new Vector<>();
             rows.add(item.getId());
@@ -140,7 +146,7 @@ public class ItemUi extends JFrame {
         }
     }
 
-    private void btnSearchAp(ActionEvent e){
+    private void btnSearchAp(ActionEvent e) {
 
         String name = txtSearchName.getText();
 
@@ -157,13 +163,31 @@ public class ItemUi extends JFrame {
             subcatogory = (SubCategory) selectedSubCategory;
         }
 
-        Hashtable <String , Object> itemHt = new Hashtable<>();
-        if (!name.equals("")) {
-            itemHt.put("name" , name);
-        } else if (itemstatus != null) {
-            itemHt.put("status" , itemstatus);
-        } else if (subcatogory != null) {
-            itemHt.put("subcategory" , subcatogory);
+        Hashtable<String, Object> itemHt = new Hashtable<>();
+        if (!name.equals("") && itemstatus == null && subcatogory == null) {
+            itemHt.put("name", name);
+        } else if (name.equals("") && itemstatus != null && subcatogory == null) {
+            itemHt.put("status", itemstatus);
+        } else if (name.equals("") && itemstatus == null && subcatogory != null) {
+            itemHt.put("subcategory", subcatogory);
+
+        } else if (!name.equals("") && itemstatus != null && subcatogory == null) {
+            itemHt.put("status", itemstatus);
+            itemHt.put("name", name);
+
+        } else if (!name.equals("") && itemstatus == null && subcatogory != null) {
+            itemHt.put("name", name);
+            itemHt.put("subcategory", subcatogory);
+
+        } else if (name.equals("") && itemstatus != null && subcatogory != null) {
+            itemHt.put("status", itemstatus);
+            itemHt.put("subcategory", subcatogory);
+
+        }else if (!name.equals("") && itemstatus != null && subcatogory != null) {
+            itemHt.put("name", name);
+            itemHt.put("status", itemstatus);
+            itemHt.put("subcategory", subcatogory);
+
         } else {
             JOptionPane.showMessageDialog(null, "Please Enter Value");
             itemHt = null;
